@@ -1,0 +1,18 @@
+<center><h1>Aeronautical Briefing Center</h1></center>
+
+<%= bootstrap_form_tag url: '/home/briefing', method: 'get' do |f| %>
+ <div class="form-group">
+    <label for="inputAerodromes3" class="col-sm-2 control-label">Aerodromes</label>
+    <div class="col-sm-10">
+      <%= f.text_field :aerodromes, hide_label: :true, help: "Separate different aerodromes by a comma (,)." %>
+      <%= f.form_group :terms do %>
+  <%= f.check_box :wx, label: "Weather Package" %>
+  <%= f.check_box :notam, label: "Notam Package" %>
+<% end %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+	    <%= f.submit "Go!", class: "btn btn-success btn-lg" %>    </div>
+  </div>
+<% end %>

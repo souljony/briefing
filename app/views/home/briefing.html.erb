@@ -1,0 +1,185 @@
+<% icao = params[:aerodromes] %>
+<% aerodromesarray = icao.split(",") %>
+<% require 'open-uri' %>
+<center><h1>Aeronautical Briefing Center</h1></center>
+<div class="page-header">
+<%= link_to '<span class="glyphicon glyphicon-print" aria-hidden="true"></span> Download PDF'.html_safe, briefing_path(icao, :format => "pdf", :aerodromes => icao), class: "btn btn-success btn-xs" %>
+<h2>WEATHER INFO</h2>
+</div>
+<h4>METARs and TAFs</h4>
+<div class="panel panel-default">
+  <div class="panel-body">
+<div role="tabpanel">
+  <!-- Nav tabs -->
+  <ul id="tabs" class="nav nav-pills nav-justified" role="tablist">
+  	<% aerodromesarray.each do |value| %>
+  	  		<% if aerodromesarray.first == value %>
+  	  		  		    <li role="presentation" class="active"><a href="#<%= value %>" aria-controls="<%= value %>" role="tab" data-toggle="tab"><%= value %></a></li>
+  	  		  		    <% else %>
+  		    <li role="presentation"><a href="#<%= value %>" aria-controls="<%= value %>" role="tab" data-toggle="tab"><%= value %></a></li>
+  	  		<% end %>
+  	<% end %>
+  </ul>
+  <!-- Tab panes -->
+  <div class="tab-content">
+  <% aerodromesarray.each do |value| %>
+    <% if aerodromesarray.first == value %>
+  		<div role="tabpanel" class="tab-pane fade in active" id="<%= value %>">
+  		<% else %>
+  		<div role="tabpanel" class="tab-pane fade" id="<%= value %>">
+  		<% end %>
+  		</br>
+  		<h5>METAR</h5>
+  			  	<% metar = open("http://weather.noaa.gov/pub/data/observations/metar/stations/#{value}.TXT") %>
+<%= metar.read %>
+		<h5>TAF</h5>
+	  	<% taf = open("http://weather.noaa.gov/pub/data/forecasts/taf/stations/#{value}.TXT") %>
+<%= taf.read %>
+  		</div>
+  <% end %>
+  </div>
+</div>
+</div>
+  </div>
+  
+<h4>Weather Charts</h4>  
+<div class="panel panel-default">
+  <div class="panel-body">
+  	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Surface Pressure Charts (Forecasts)
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+      <div class="btn-group btn-group-justified" role="group" aria-label="...">
+      <div class="btn-group" role="group">
+  <a href="http://brunnur.vedur.is/flugkort/PPVE89_EGRR_0000.png" class="btn btn-default" role="button" target="_blank">00 Hours</a>
+      </div>
+      <div class="btn-group" role="group">
+  <a href="http://brunnur.vedur.is/flugkort/PPVE89_EGRR_0600.png" class="btn btn-default" role="button" target="_blank">06 Hours</a>
+      </div>
+      <div class="btn-group" role="group">
+  <a href="http://brunnur.vedur.is/flugkort/PPVE89_EGRR_1200.png" class="btn btn-default" role="button" target="_blank">12 Hours</a>
+      </div>
+      <div class="btn-group" role="group">
+  <a href="http://brunnur.vedur.is/flugkort/PPVE89_EGRR_1800.png" class="btn btn-default" role="button" target="_blank">18 Hours</a>
+      </div>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Upper Wind and Temperature
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+              <div class="btn-group btn-group-justified" role="group" aria-label="...">
+      <div class="btn-group" role="group">
+  <a href="http://brunnur.vedur.is/flugkort/vindakort/eur_FL050_0000.png" class="btn btn-default" role="button" target="_blank">00 Hours</a>
+      </div>
+      <div class="btn-group" role="group">
+  <a href="http://brunnur.vedur.is/flugkort/vindakort/eur_FL050_0600.png" class="btn btn-default" role="button" target="_blank">06 Hours</a>
+      </div>
+      <div class="btn-group" role="group">
+  <a href="http://brunnur.vedur.is/flugkort/vindakort/eur_FL050_1200.png" class="btn btn-default" role="button" target="_blank">12 Hours</a>
+      </div>
+      <div class="btn-group" role="group">
+  <a href="http://brunnur.vedur.is/flugkort/vindakort/eur_FL050_1800.png" class="btn btn-default" role="button" target="_blank">18 Hours</a>
+      </div>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Significant Weather Charts
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+              <div class="btn-group btn-group-justified" role="group" aria-label="...">
+      <div class="btn-group" role="group">
+  <a href="http://brunnur.vedur.is/flugkort/PGDE14_EGRR_0000.PNG" class="btn btn-default" role="button" target="_blank">00 Hours</a>
+      </div>
+      <div class="btn-group" role="group">
+  <a href="http://brunnur.vedur.is/flugkort/PGDE14_EGRR_0600.PNG" class="btn btn-default" role="button" target="_blank">06 Hours</a>
+      </div>
+      <div class="btn-group" role="group">
+  <a href="http://brunnur.vedur.is/flugkort/PGDE14_EGRR_1200.PNG" class="btn btn-default" role="button" target="_blank">12 Hours</a>
+      </div>
+      <div class="btn-group" role="group">
+  <a href="http://brunnur.vedur.is/flugkort/PGDE14_EGRR_1800.PNG" class="btn btn-default" role="button" target="_blank">18 Hours</a>
+      </div>
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+<div class="page-header">  
+<h2>NOTAMS</h2>
+</div>
+<div class="panel panel-default">
+  <div class="panel-body">
+<div role="tabpanel2">
+  <!-- Nav tabs -->
+  <ul id="tabs2" class="nav nav-pills nav-justified" role="tablist">
+  	<% aerodromesarray.each do |value| %>
+  	  		<% if aerodromesarray.first == value %>
+  	  		  		    <li role="presentation" class="active"><a href="#<%= value %>1" aria-controls="<%= value %>" role="tab" data-toggle="tab"><%= value %></a></li>
+  	  		  		    <% else %>
+  		    <li role="presentation"><a href="#<%= value %>1" aria-controls="<%= value %>" role="tab" data-toggle="tab"><%= value %></a></li>
+  	  		<% end %>
+  	<% end %>
+  </ul>
+  <!-- Tab panes -->
+  <div class="tab-content">
+  <% aerodromesarray.each do |value| %>
+    <% if aerodromesarray.first == value %>
+  		<div role="tabpanel" class="tab-pane fade in active" id="<%= value %>1">
+  		<% else %>
+  		<div role="tabpanel" class="tab-pane fade" id="<%= value %>1">
+  		<% end %>
+  		</br>
+  		<table class="table table-striped table-hover table-bordered">
+  			<tbody>
+  			<% value.notams(:objects => true).each do |text| %>
+        <tr>
+          <td><%= text %></td>
+        </tr>
+  			<% end %>
+  				</tbody>
+  			</table>
+  		</div>
+  <% end %>
+  </div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $('#tabs').tab();
+    });
+</script>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $('#tabs2').tab();
+    });
+</script> 
+</div>
+</div> 
