@@ -1,18 +1,25 @@
 <center><h1>Aeronautical Briefing Center</h1></center>
 
+<h3><center>Enter the Aerodromes:</center></h3>
 <%= bootstrap_form_tag url: '/home/briefing', method: 'get' do |f| %>
  <div class="form-group">
-    <label for="inputAerodromes3" class="col-sm-2 control-label">Aerodromes</label>
-    <div class="col-sm-10">
+     <label for="inputAerodromes3" class="col-sm-3 control-label"></label>
+    <div class="col-sm-6">
       <%= f.text_field :aerodromes, hide_label: :true, help: "Separate different aerodromes by a comma (,)." %>
-      <%= f.form_group :terms do %>
-  <%= f.check_box :wx, label: "Weather Package" %>
-  <%= f.check_box :notam, label: "Notam Package" %>
+<%= f.form_group :time, label: { text: "Charts for:" }, help: "Set the time you want for the weather charts." do %>
+  <%= f.radio_button :time, 0, label: "00 Hours", checked: true %>
+  <%= f.radio_button :time, 1, label: "06 Hours" %>
+  <%= f.radio_button :time, 2, label: "12 Hours" %>
+  <%= f.radio_button :time, 3, label: "18 Hours" %>
+<% end %>  
+<% f.form_group :terms do %>
+  <% f.check_box :wx, label: "Weather Package" %>
+  <% f.check_box :notam, label: "Notam Package" %>
 <% end %>
     </div>
   </div>
   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+    <div class="col-sm-offset-5 col-sm-5">
 	    <%= f.submit "Go!", class: "btn btn-success btn-lg" %>    </div>
   </div>
 <% end %>

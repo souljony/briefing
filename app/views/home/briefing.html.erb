@@ -1,14 +1,16 @@
 <% icao = params[:aerodromes] %>
+<% time = params[:time] %>
 <% aerodromesarray = icao.split(",") %>
+<% aerodromesarray.map!(&:upcase) %>
 <% require 'open-uri' %>
 <center><h1>Aeronautical Briefing Center</h1></center>
 <div class="page-header">
-<%= link_to '<span class="glyphicon glyphicon-print" aria-hidden="true"></span> Download PDF'.html_safe, briefing_path(icao, :format => "pdf", :aerodromes => icao), class: "btn btn-success btn-xs" %>
+<%= link_to '<span class="glyphicon glyphicon-print" aria-hidden="true"></span> Download PDF'.html_safe, briefing_path(icao, :format => "pdf", :aerodromes => icao, :time => time), class: "btn btn-success btn-xs" %>
 <h2>WEATHER INFO</h2>
 </div>
 <h4>METARs and TAFs</h4>
 <div class="panel panel-default">
-  <div class="panel-body">
+<div class="panel-body">
 <div role="tabpanel">
   <!-- Nav tabs -->
   <ul id="tabs" class="nav nav-pills nav-justified" role="tablist">
@@ -30,17 +32,17 @@
   		<% end %>
   		</br>
   		<h5>METAR</h5>
-  			  	<% metar = open("http://weather.noaa.gov/pub/data/observations/metar/stations/#{value}.TXT") %>
-<%= metar.read %>
+  			<% metar = open("http://weather.noaa.gov/pub/data/observations/metar/stations/#{value}.TXT") %>
+  			<%= metar.read %>
 		<h5>TAF</h5>
-	  	<% taf = open("http://weather.noaa.gov/pub/data/forecasts/taf/stations/#{value}.TXT") %>
-<%= taf.read %>
+	  		<% taf = open("http://weather.noaa.gov/pub/data/forecasts/taf/stations/#{value}.TXT") %>
+	  		<%= taf.read %>  			
   		</div>
   <% end %>
   </div>
 </div>
 </div>
-  </div>
+</div>
   
 <h4>Weather Charts</h4>  
 <div class="panel panel-default">

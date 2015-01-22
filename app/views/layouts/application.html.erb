@@ -10,10 +10,20 @@
 
     <div id="main-container" class="container">
       <div class="row">
-        <div class="col-xs-3">
-          <h3>Aeronautical Briefing Center</h3>
+        <div class="col-sm-offset col-xs-3">
+          <h3><center>Briefing Center</center></h3>
+          <img src="http://leavia.pt/images/logo.png">
         </div>
         <div class="col-xs-9">
+            <% flash.each do |name, msg| %>
+  <% if msg.is_a?(String) %>
+  <br/>
+    <div class="alert alert-<%= name.to_s == 'notice' ? 'success' : 'danger' %>">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= content_tag :div, msg, :id => "flash_#{name}" %>
+    </div>
+  <% end %>
+<% end %>
           <%= yield %>
         </div>
       </div>
