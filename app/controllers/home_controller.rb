@@ -18,8 +18,6 @@ class HomeController < ApplicationController
   @metar.push(@metarquery)
   puts @metar.inspect
   rescue
-  flash[alert] = "Be aware, at least one aerodrome is invalid!"
-  redirect_to(:action => 'index')
   end
   end
   

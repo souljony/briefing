@@ -26,14 +26,22 @@ pdf.move_down 10
 pdf.font_size 18
 pdf.text "METAR for #{icao}", :style => :bold
 pdf.font_size 12
+begin
 openmetar = open("http://weather.noaa.gov/pub/data/observations/metar/stations/#{icao}.TXT")
 pdf.text openmetar.read
+rescue
+pdf.text ">> METAR is not available! <<"
+end
 pdf.move_down 5
 pdf.font_size 18
 pdf.text "TAF for #{icao}", :style => :bold
 pdf.font_size 12
+begin
 opentaf = open("http://weather.noaa.gov/pub/data/forecasts/taf/stations/#{icao}.TXT")
 pdf.text opentaf.read
+rescue
+pdf.text ">> TAF is not available! <<"
+end
 pdf.move_down 15
 end
 
@@ -81,8 +89,11 @@ pdf.move_down 5
 pdf.font_size 22
 pdf.move_down 20
 pdf.text "NOTAMS for #{icao}", :style => :bold
-icao.notams.each do |texto|
 pdf.font_size 12
+if icao.notams.blank?
+pdf.text ">> There are no NOTAMs! <<"
+end
+icao.notams.each do |texto|
 pdf.text texto
 end
 end

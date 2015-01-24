@@ -27,16 +27,24 @@
   <% aerodromesarray.each do |value| %>
     <% if aerodromesarray.first == value %>
   		<div role="tabpanel" class="tab-pane fade in active" id="<%= value %>">
-  		<% else %>
+  	<% else %>
   		<div role="tabpanel" class="tab-pane fade" id="<%= value %>">
-  		<% end %>
+  	<% end %>
   		</br>
   		<h5>METAR</h5>
+  		<% begin %>
   			<% metar = open("http://weather.noaa.gov/pub/data/observations/metar/stations/#{value}.TXT") %>
   			<%= metar.read %>
+  		<% rescue %>
+  		>> METAR is not available! <<
+  		<% end %>
 		<h5>TAF</h5>
+  		<% begin %>
 	  		<% taf = open("http://weather.noaa.gov/pub/data/forecasts/taf/stations/#{value}.TXT") %>
-	  		<%= taf.read %>  			
+	  		<%= taf.read %>  
+  		<% rescue %>
+  		>> TAF is not available! <<
+  		<% end %>			
   		</div>
   <% end %>
   </div>
@@ -159,6 +167,9 @@
   		</br>
   		<table class="table table-striped table-hover table-bordered">
   			<tbody>
+  			<% if value.notams(:objects => true).blank? %>
+  			<center><h4> >> There are no NOTAMs! << </h4></center>
+  			<% end %>
   			<% value.notams(:objects => true).each do |text| %>
         <tr>
           <td><%= text %></td>

@@ -1,8 +1,11 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-@media print {
-    .accordion-group .accordion-body.collapse {
-        height: auto;
-    }
+footer {
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 10px;
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
