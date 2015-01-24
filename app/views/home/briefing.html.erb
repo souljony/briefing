@@ -3,9 +3,8 @@
 <% aerodromesarray = icao.split(",") %>
 <% aerodromesarray.map!(&:upcase) %>
 <% require 'open-uri' %>
-<center><h1>Aeronautical Briefing Center</h1></center>
 <div class="page-header">
-<%= link_to '<span class="glyphicon glyphicon-print" aria-hidden="true"></span> Download PDF'.html_safe, briefing_path(icao, :format => "pdf", :aerodromes => icao, :time => time), class: "btn btn-success btn-xs" %>
+<center><%= link_to '<span class="glyphicon glyphicon-print" aria-hidden="true"></span> Download the PDF'.html_safe, briefing_path(icao, :format => "pdf", :aerodromes => icao, :time => time), class: "btn btn-success btn-M" %></center>
 <h2>WEATHER INFO</h2>
 </div>
 <h4>METARs and TAFs</h4>
