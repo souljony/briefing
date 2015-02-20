@@ -1,11 +1,64 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+font-family: 'Open Sans', sans-serif;
+}
+
+
+.jumbotron {
+	background-image: url(image-path('contrails.jpg'));
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: white;
+}
+
+.jumbotron .help-block {
+	color: #c9c9c9;
+}
+
+#aerodromes {
+height: 70px;
+font-size: 36px;
+text-transform: uppercase;
+font-style: italic;
+color: #c6c6c6;
+}
+
+.form-inline .radio {
+padding-left: 10px;
+}
+
+#lppt {
+	background-image: url(image-path('lisboa.jpg'));
+}
+
+#lpfr {
+	background-image: url(image-path('algarve.jpg'));
+	background-size: cover;
+}
+
+#lppr {
+	background-image: url(image-path('porto.jpg'));
+	background-size: cover;
+}
+
+.thumbnail .caption {
+	color: white;
+	text-shadow: 1px 1px 5px black;
+}
+
+.thumbnail .caption p {
+	color: white;
+	font-size: 16px;
+	text-shadow: 1px 1px 5px black;
+}
+
 footer {
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 10px;
-  margin-top: 30px;
-  margin-bottom: 20px;
+bottom: 0;
+width: 100%;
+/* Set the fixed height of the footer here */
+height: 10px;
+margin-top: 30px;
+margin-bottom: 20px;
 }
