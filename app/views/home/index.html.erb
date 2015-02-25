@@ -5,7 +5,7 @@ Enter the Aerodromes:
 <%= bootstrap_form_tag url: '/home/briefing', method: 'get' do |f| %>
  <div class="form-group">
      <label for="inputAerodromes3" class="col-sm-3 control-label"></label>
-      <%= f.text_field :aerodromes, hide_label: :true, help: "Separate different aerodromes by a comma (,)." %>
+      <%= f.text_field :aerodromes, hide_label: :true, placeholder: "LPPT,LPCS...", help: "Separate different aerodromes by a comma (,)." %>
 <%= f.form_group :time, label: { text: "Charts for:" }, help: "Set the time you want for the weather charts." do %>
 <div class="form-inline">
   <%= f.radio_button :time, 0, label: "00 Hours", checked: true %>

@@ -13,6 +13,12 @@ class HomeController < ApplicationController
   @aerodromes.each_with_index do |icao, index|
   @metar = Array.new
   begin
+  if icao.length < 4
+  flash[:error] = 'Warning! There is an invalid ICAO!'
+  puts "teste"
+  redirect_to root_path
+  return
+  end
   openmetar = open("http://weather.noaa.gov/pub/data/observations/metar/stations/#{icao}.TXT")
   @metarquery = openmetar.read
   @metar.push(@metarquery)
